@@ -182,7 +182,7 @@ String equalsBody(String className, Map<String, bool> fields) {
 String copyToMethodBody(ClassElement clazz, Iterable<String> fields) {
   final paramsInput = fields.fold(
     "",
-    (r, field) => "$r ${field}: ${field} ?? this.${field},",
+    (r, field) => "$r ${field}=${field} ?? this.${field},",
   );
 
   final typeParameters = clazz.typeParameters.isEmpty
@@ -194,7 +194,7 @@ String copyToMethodBody(ClassElement clazz, Iterable<String> fields) {
 
 String toStringBody(String className, Iterable<String> fields) {
   final fieldsToString =
-      fields.fold('', (r, field) => r + '\\\'$field\\\': \${this.$field},');
+      fields.fold('', (r, field) => r + '\\\'$field\\\'=\${this.$field},');
 
-  return "return '$className {$fieldsToString}';";
+  return "return '$className($fieldsToString)';";
 }
