@@ -196,5 +196,5 @@ String toStringBody(String className, Iterable<String> fields) {
   final fieldsToString =
       fields.fold('', (r, field) => r + '\\\'$field\\\': \${this.$field},');
 
-  return "return '$className <$fieldsToString>';";
+  return "return '$className {$fieldsToString}';";
 }
