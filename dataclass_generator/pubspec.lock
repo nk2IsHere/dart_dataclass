@@ -126,7 +126,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.12"
+    version: "1.15.0-nullsafety.2"
   convert:
     dependency: transitive
     description:
@@ -165,9 +165,11 @@ packages:
   dataclass:
     dependency: "direct main"
     description:
-      name: dataclass
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: dataclass
+      ref: HEAD
+      resolved-ref: "5df6e03f5017500cf5f0ebe9bf313070e40d64b3"
+      url: "https://github.com/nk2IsHere/dart_dataclass.git"
+    source: git
     version: "0.3.0+1"
   fixnum:
     dependency: transitive
@@ -506,4 +508,4 @@ packages:
     source: hosted
     version: "2.2.0"
 sdks:
-  dart: ">2.9.0 <3.0.0"
+  dart: ">=2.10.0-0 <2.10.0"
