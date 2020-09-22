@@ -163,6 +163,13 @@
             </list>
           </value>
         </entry>
+        <entry key="dataclass">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/git/dart_dataclass-5df6e03f5017500cf5f0ebe9bf313070e40d64b3/dataclass/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="fixnum">
           <value>
             <list>
@@ -502,6 +509,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/.pub-cache/git/dart_dataclass-5df6e03f5017500cf5f0ebe9bf313070e40d64b3/dataclass/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-4.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/analyzer-0.39.10/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/args-1.5.2/lib" />
