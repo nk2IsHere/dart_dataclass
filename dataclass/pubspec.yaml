@@ -5,9 +5,9 @@ author: Jaroslaw Butajlo <jaroslaw.butajlo@gmail.com>
 homepage: https://github.com/jarekb123/dart_dataclass
 
 environment:
-  sdk: ">=2.0.0 <3.0.0"
+  sdk: ">2.9.0 <3.0.0"
 
 dependencies:
-  collection: ">=1.14.0 <1.15.0"
+  collection: 1.15.0-nullsafety.2
 
 dev_dependencies:
