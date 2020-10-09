@@ -1,3 +1,9 @@
+## [0.4.0+0]
+* fixed path in generator
+
+## [0.4.0]
+* Bump versions
+
 ## [0.3.0+2]
 * Remove debug prints
 

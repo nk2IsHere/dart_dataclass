@@ -162,15 +162,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.3"
-  dataclass:
+  dataclass_beta:
     dependency: "direct main"
     description:
-      path: dataclass
-      ref: HEAD
-      resolved-ref: "5df6e03f5017500cf5f0ebe9bf313070e40d64b3"
-      url: "https://github.com/nk2IsHere/dart_dataclass.git"
-    source: git
-    version: "0.3.0+1"
+      name: dataclass_beta
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   fixnum:
     dependency: transitive
     description:
