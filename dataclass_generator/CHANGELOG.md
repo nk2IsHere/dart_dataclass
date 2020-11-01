@@ -1,3 +1,6 @@
+## [0.4.0+2]
+* Bump versions
+
 ## [0.4.0+0, 0.4.0+1]
 * fixed path in generator
 
