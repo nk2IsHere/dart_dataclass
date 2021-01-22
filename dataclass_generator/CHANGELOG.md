@@ -1,3 +1,6 @@
+## [0.4.0+3]
+* Bump versions
+
 ## [0.4.0+2]
 * Bump versions
 
