@@ -62,7 +62,7 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
 
       final dataClass = MixinBuilder()
         ..name = '_\$${element.name}'
-        ..on = TypeReference((t) => t.symbol = element.name)
+        // ..on = TypeReference((t) => t.symbol = element.name)
         // ..constructors.add(constConstructor)
         ..types.addAll(element.typeParameters
             .map((typeParam) => refer(typeParam.displayName)))
