@@ -1,3 +1,6 @@
+## [0.4.0]
+* Bump versions
+
 ## [0.3.0+1]
 * Copy README from repository to `dataclass` directory
 

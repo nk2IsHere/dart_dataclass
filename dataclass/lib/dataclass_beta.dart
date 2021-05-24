@@ -1,4 +1,4 @@
-library dataclass;
+library dataclass_beta;
 
 export 'package:collection/collection.dart';
 
