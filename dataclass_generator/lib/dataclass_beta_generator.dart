@@ -7,6 +7,7 @@ import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:dataclass_beta/dataclass_beta.dart';
+import 'package:dataclass_beta_generator/mixin_spec.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder dataClass(BuilderOptions options) =>
@@ -59,17 +60,18 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
 
       final constConstructor = (ConstructorBuilder()..constant = true).build();
 
-      final dataClass = ClassBuilder()
+      final dataClass = MixinBuilder()
         ..name = '_\$${element.name}'
-        ..constructors.add(constConstructor)
+        ..on = TypeReference((t) => t.symbol = element.name)
+        // ..constructors.add(constConstructor)
         ..types.addAll(element.typeParameters
             .map((typeParam) => refer(typeParam.displayName)))
         ..methods.addAll(getters)
         ..methods.add(equalsMethod)
         ..methods.add(hashCodeMethod)
         ..methods.add(toStringMethod)
-        ..methods.add(copyWithMethod)
-        ..abstract = true;
+        ..methods.add(copyWithMethod);
+        // ..abstract = true;
 
       return formatter.format(dataClass.build().accept(emitter).toString());
     } else {
