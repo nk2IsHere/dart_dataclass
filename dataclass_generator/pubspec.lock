@@ -173,8 +173,8 @@ packages:
     dependency: "direct main"
     description:
       path: dataclass
-      ref: ae55d20
-      resolved-ref: ae55d206a15c2e5ebf81f39fa7c7ca51779fefed
+      ref: cc11c8c
+      resolved-ref: cc11c8ccd9785f40edc3fcd2f0342e0966ff6635
       url: "https://github.com/nk2IsHere/dart_dataclass.git"
     source: git
     version: "0.4.0"
@@ -494,4 +494,4 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">2.12.0 <3.0.0"
+  dart: ">=2.12.0 <3.0.0"

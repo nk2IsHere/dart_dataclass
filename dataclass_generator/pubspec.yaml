@@ -12,7 +12,7 @@ dependencies:
     git:
       url: https://github.com/nk2IsHere/dart_dataclass.git
       path: dataclass
-      ref: ae55d20
+      ref: cc11c8c
   source_gen: ^1.0.0
   code_builder: ^4.0.0
 
