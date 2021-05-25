@@ -1,11 +1,5 @@
 library dataclass_beta;
 
-export 'package:collection/collection.dart';
-
-/// Short-hand annotation for `@DataClass()`.
-/// You can use `@dataClass` instead of `@DataClass()`
-const dataClass = DataClass();
-
 class DataClass {
   /// DataClass annotation used for dataclass code generation
   const DataClass();
@@ -43,3 +37,4 @@ int _finish(int hash) {
   hash = hash ^ (hash >> 11);
   return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
 }
+
