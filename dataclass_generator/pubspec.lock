@@ -173,11 +173,11 @@ packages:
     dependency: "direct main"
     description:
       path: dataclass
-      ref: cc11c8c
-      resolved-ref: cc11c8ccd9785f40edc3fcd2f0342e0966ff6635
+      ref: "112aecd"
+      resolved-ref: "112aecd2a8de13c2e1ac89f44d89629ff8e23bd9"
       url: "https://github.com/nk2IsHere/dart_dataclass.git"
     source: git
-    version: "0.4.0"
+    version: "1.0.0"
   file:
     dependency: transitive
     description:
