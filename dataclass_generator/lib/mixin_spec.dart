@@ -46,7 +46,11 @@ abstract class Mixin extends Object
         R? context,
       ]) {
     assert(R is StringSink);
-    return (visitor as SpecVisitor<StringSink>).visitMixin(this, context as StringSink) as R;
+    return (visitor as SpecVisitor<StringSink>)
+      .visitMixin(
+        this,
+        (context ?? StringBuffer()) as StringSink
+      ) as R;
   }
 }
 
