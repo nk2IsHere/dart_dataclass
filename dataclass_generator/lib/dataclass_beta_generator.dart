@@ -138,7 +138,7 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     final params = fields
         .map((field) => ParameterBuilder()
           ..name = field.name
-          ..type = refer(field.type.getDisplayString(withNullability: true))
+          ..type = refer("${field.type.getDisplayString(withNullability: false)}?")
           ..named = true)
         .map((paramBuilder) => paramBuilder.build());
 
