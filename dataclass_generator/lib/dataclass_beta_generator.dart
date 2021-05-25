@@ -24,12 +24,12 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     BuildStep buildStep,
   ) {
     void _isSourceValid(ClassElement element) {
-      if (element.unnamedConstructor == null || !element.unnamedConstructor.isDefaultConstructor) {
+      if (element.unnamedConstructor == null) {
         throw InvalidGenerationSourceError(
             'The ${element.name} @DataClass must have unnamed (default) constructor');
       }
-      if (element.unnamedConstructor.parameters.isNotEmpty) {
-        if (!element.unnamedConstructor.parameters
+      if (element.unnamedConstructor!.parameters.isNotEmpty) {
+        if (!element.unnamedConstructor!.parameters
             .any((param) => param.isNamed)) {
           throw InvalidGenerationSourceError(
               'The ${element.name} @DataClass constructor should have named params only');
@@ -45,13 +45,13 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     if (element is ClassElement && !element.isAbstract) {
       _isSourceValid(element);
 
-      final equalsMethod = _equalsMethod(element.displayName, element.unnamedConstructor.parameters);
-      final copyWithMethod = _copyWithMethod(element, element.unnamedConstructor.parameters);
-      final hashCodeMethod = _hashCodeMethod(element.unnamedConstructor.parameters);
+      final equalsMethod = _equalsMethod(element.displayName, element.unnamedConstructor!.parameters);
+      final copyWithMethod = _copyWithMethod(element, element.unnamedConstructor!.parameters);
+      final hashCodeMethod = _hashCodeMethod(element.unnamedConstructor!.parameters);
       final toStringMethod =
-          _toStringMethod(element.displayName, element.unnamedConstructor.parameters);
+          _toStringMethod(element.displayName, element.unnamedConstructor!.parameters);
 
-      final getters = element.unnamedConstructor.parameters
+      final getters = element.unnamedConstructor!.parameters
           .map((parameter) => MethodBuilder()
             ..name = parameter.displayName
             ..returns = refer(parameter.type.getDisplayString(withNullability: true))
@@ -99,8 +99,8 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
       (element) => element.metadata.map(
         (annotation) => annotation
             .computeConstantValue()
-            .getField('deepEquality')
-            .toBoolValue(),
+            ?.getField('deepEquality')
+            ?.toBoolValue()
       ),
     );
 
@@ -114,7 +114,10 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     if (collectionAnnotation == null)
       return false;
     else {
-      return collectionAnnotation.getField('deepEquality').toBoolValue();
+      final deepEqualityValue = collectionAnnotation
+        .getField('deepEquality')
+        ?.toBoolValue();
+      return deepEqualityValue!;
     }
   }
 
@@ -195,6 +198,10 @@ String copyToMethodBody(ClassElement clazz, Iterable<String> fields) {
 }
 
 String toStringBody(String className, Iterable<String> fields) {
-  final fieldsToString = fields.fold('', (r, field) => r + '$field=\${this.$field},');
-  return "return '$className($fieldsToString)';";
+  final String fieldsToString = fields.fold('', (r, field) => r + '$field=\${this.$field},');
+  final String fieldsToStringCut = fieldsToString.length > 0?
+      fieldsToString.substring(0, fieldsToString.length - 1)
+      : fieldsToString;
+
+  return "return '$className(${fieldsToStringCut})';";
 }
