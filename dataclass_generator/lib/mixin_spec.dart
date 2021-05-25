@@ -28,8 +28,7 @@ abstract class Mixin extends Object
   @override
   BuiltList<String> get docs;
 
-  @nullable
-  Reference get on;
+  Reference? get on;
 
   BuiltList<Reference> get implements;
 
@@ -44,9 +43,10 @@ abstract class Mixin extends Object
   @override
   R accept<R>(
       SpecVisitor<R> visitor, [
-        R context,
+        R? context,
       ]) {
-    return visitor.visitMixin(this, context);
+    assert(R is StringSink);
+    return (visitor as SpecVisitor<StringSink>).visitMixin(this, context as StringSink) as R;
   }
 }
 
@@ -63,7 +63,7 @@ abstract class MixinBuilder extends Object
   @override
   ListBuilder<String> docs = ListBuilder<String>();
 
-  Reference on;
+  Reference? on;
 
   ListBuilder<Reference> implements = ListBuilder<Reference>();
 
@@ -73,5 +73,5 @@ abstract class MixinBuilder extends Object
   ListBuilder<Method> methods = ListBuilder<Method>();
 
   /// Name of the mixin.
-  String name;
+  late String name;
 }

@@ -12,7 +12,7 @@ class _$Mixin extends Mixin {
   @override
   final BuiltList<String> docs;
   @override
-  final Reference on;
+  final Reference? on;
   @override
   final BuiltList<Reference> implements;
   @override
@@ -22,17 +22,17 @@ class _$Mixin extends Mixin {
   @override
   final String name;
 
-  factory _$Mixin([void Function(MixinBuilder) updates]) =>
+  factory _$Mixin([void Function(MixinBuilder)? updates]) =>
       (new MixinBuilder()..update(updates)).build() as _$Mixin;
 
   _$Mixin._(
-      {this.annotations,
-        this.docs,
+      {required this.annotations,
+        required this.docs,
         this.on,
-        this.implements,
-        this.types,
-        this.methods,
-        this.name})
+        required this.implements,
+        required this.types,
+        required this.methods,
+        required this.name})
       : super._() {
     if (annotations == null) {
       throw new BuiltValueNullFieldError('Mixin', 'annotations');
@@ -103,7 +103,7 @@ class _$Mixin extends Mixin {
 }
 
 class _$MixinBuilder extends MixinBuilder {
-  _$Mixin _$v;
+  _$Mixin? _$v;
 
   @override
   ListBuilder<Expression> get annotations {
@@ -130,13 +130,13 @@ class _$MixinBuilder extends MixinBuilder {
   }
 
   @override
-  Reference get on {
+  Reference? get on {
     _$this;
     return super.on;
   }
 
   @override
-  set on(Reference on) {
+  set on(Reference? on) {
     _$this;
     super.on = on;
   }
@@ -193,13 +193,13 @@ class _$MixinBuilder extends MixinBuilder {
 
   MixinBuilder get _$this {
     if (_$v != null) {
-      super.annotations = _$v.annotations?.toBuilder();
-      super.docs = _$v.docs?.toBuilder();
-      super.on = _$v.on;
-      super.implements = _$v.implements?.toBuilder();
-      super.types = _$v.types?.toBuilder();
-      super.methods = _$v.methods?.toBuilder();
-      super.name = _$v.name;
+      super.annotations = _$v!.annotations.toBuilder();
+      super.docs = _$v!.docs.toBuilder();
+      super.on = _$v!.on;
+      super.implements = _$v!.implements.toBuilder();
+      super.types = _$v!.types.toBuilder();
+      super.methods = _$v!.methods.toBuilder();
+      super.name = _$v!.name;
       _$v = null;
     }
     return this;
@@ -214,7 +214,7 @@ class _$MixinBuilder extends MixinBuilder {
   }
 
   @override
-  void update(void Function(MixinBuilder) updates) {
+  void update(void Function(MixinBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -232,7 +232,7 @@ class _$MixinBuilder extends MixinBuilder {
               methods: methods.build(),
               name: name);
     } catch (_) {
-      String _$failedField;
+      String _$failedField = '';
       try {
         _$failedField = 'annotations';
         annotations.build();
