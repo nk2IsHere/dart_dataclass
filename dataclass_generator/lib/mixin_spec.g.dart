@@ -34,24 +34,12 @@ class _$Mixin extends Mixin {
         required this.methods,
         required this.name})
       : super._() {
-    if (annotations == null) {
-      throw new BuiltValueNullFieldError('Mixin', 'annotations');
-    }
-    if (docs == null) {
-      throw new BuiltValueNullFieldError('Mixin', 'docs');
-    }
-    if (implements == null) {
-      throw new BuiltValueNullFieldError('Mixin', 'implements');
-    }
-    if (types == null) {
-      throw new BuiltValueNullFieldError('Mixin', 'types');
-    }
-    if (methods == null) {
-      throw new BuiltValueNullFieldError('Mixin', 'methods');
-    }
-    if (name == null) {
-      throw new BuiltValueNullFieldError('Mixin', 'name');
-    }
+    BuiltValueNullFieldError.checkNotNull(annotations, 'Mixin', 'annotations');
+    BuiltValueNullFieldError.checkNotNull(docs, 'Mixin', 'docs');
+    BuiltValueNullFieldError.checkNotNull(implements, 'Mixin', 'implements');
+    BuiltValueNullFieldError.checkNotNull(types, 'Mixin', 'types');
+    BuiltValueNullFieldError.checkNotNull(methods, 'Mixin', 'methods');
+    BuiltValueNullFieldError.checkNotNull(name, 'Mixin', 'name');
   }
 
   @override
@@ -108,7 +96,7 @@ class _$MixinBuilder extends MixinBuilder {
   @override
   ListBuilder<Expression> get annotations {
     _$this;
-    return super.annotations ??= new ListBuilder<Expression>();
+    return super.annotations;
   }
 
   @override
@@ -120,7 +108,7 @@ class _$MixinBuilder extends MixinBuilder {
   @override
   ListBuilder<String> get docs {
     _$this;
-    return super.docs ??= new ListBuilder<String>();
+    return super.docs;
   }
 
   @override
@@ -144,7 +132,7 @@ class _$MixinBuilder extends MixinBuilder {
   @override
   ListBuilder<Reference> get implements {
     _$this;
-    return super.implements ??= new ListBuilder<Reference>();
+    return super.implements;
   }
 
   @override
@@ -156,7 +144,7 @@ class _$MixinBuilder extends MixinBuilder {
   @override
   ListBuilder<Reference> get types {
     _$this;
-    return super.types ??= new ListBuilder<Reference>();
+    return super.types;
   }
 
   @override
@@ -168,7 +156,7 @@ class _$MixinBuilder extends MixinBuilder {
   @override
   ListBuilder<Method> get methods {
     _$this;
-    return super.methods ??= new ListBuilder<Method>();
+    return super.methods;
   }
 
   @override
@@ -207,9 +195,7 @@ class _$MixinBuilder extends MixinBuilder {
 
   @override
   void replace(Mixin other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Mixin;
   }
 
