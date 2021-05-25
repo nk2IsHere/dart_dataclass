@@ -24,7 +24,7 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     BuildStep buildStep,
   ) {
     void _isSourceValid(ClassElement element) {
-      if (element.unnamedConstructor == null) {
+      if (element.unnamedConstructor == null || !element.unnamedConstructor.isDefaultConstructor) {
         throw InvalidGenerationSourceError(
             'The ${element.name} @DataClass must have unnamed (default) constructor');
       }
@@ -45,28 +45,20 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     if (element is ClassElement && !element.isAbstract) {
       _isSourceValid(element);
 
-      final fields = <FieldElement>[
-        ...element.fields,
-        if(element.supertype != null && element.supertype.runtimeType != Object)
-          ...element.supertype
-              .element
-              .fields
-      ];
-
-      final equalsMethod = _equalsMethod(element.displayName, fields);
-      final copyWithMethod = _copyWithMethod(element, fields);
-      final hashCodeMethod = _hashCodeMethod(fields);
+      final equalsMethod = _equalsMethod(element.displayName, element.unnamedConstructor.parameters);
+      final copyWithMethod = _copyWithMethod(element, element.unnamedConstructor.parameters);
+      final hashCodeMethod = _hashCodeMethod(element.unnamedConstructor.parameters);
       final toStringMethod =
-          _toStringMethod(element.displayName, fields);
+          _toStringMethod(element.displayName, element.unnamedConstructor.parameters);
 
-      final getters = fields
-          .map((field) => MethodBuilder()
-            ..name = field.displayName
-            ..returns = refer(field.type.getDisplayString(withNullability: true))
+      final getters = element.unnamedConstructor.parameters
+          .map((parameter) => MethodBuilder()
+            ..name = parameter.displayName
+            ..returns = refer(parameter.type.getDisplayString(withNullability: true))
             ..type = MethodType.getter)
           .map((mb) => mb.build());
 
-      final constConstructor = (ConstructorBuilder()..constant = true).build();
+      // final constConstructor = (ConstructorBuilder()..constant = true).build();
 
       final dataClass = MixinBuilder()
         ..name = '_\$${element.name}'
@@ -89,7 +81,7 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     }
   }
 
-  Method _equalsMethod(String className, List<FieldElement> fields) {
+  Method _equalsMethod(String className, List<ParameterElement> parameters) {
     MethodBuilder mb = MethodBuilder()
       ..name = 'operator=='
       ..requiredParameters.add((ParameterBuilder()..name = 'other').build())
@@ -97,13 +89,13 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
       ..body = Code(
         equalsBody(
           className,
-          Map.fromIterable(fields,
+          Map.fromIterable(parameters,
               key: (element) => element.displayName,
               value: (element) => _hasDeepCollectionEquality(element)),
         ),
       );
 
-    fields.map(
+    parameters.map(
       (element) => element.metadata.map(
         (annotation) => annotation
             .computeConstantValue()
@@ -126,8 +118,8 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     }
   }
 
-  Method _hashCodeMethod(List<FieldElement> fields) {
-    final props = fields.map((field) => field.name);
+  Method _hashCodeMethod(List<ParameterElement> parameters) {
+    final props = parameters.map((field) => field.name);
 
     MethodBuilder mb = MethodBuilder()
       ..name = 'hashCode'
@@ -142,8 +134,8 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     return mb.build();
   }
 
-  Method _copyWithMethod(ClassElement clazz, List<FieldElement> fields) {
-    final params = fields
+  Method _copyWithMethod(ClassElement clazz, List<ParameterElement> parameters) {
+    final params = parameters
         .map((field) => ParameterBuilder()
           ..name = field.name
           ..type = refer("${field.type.getDisplayString(withNullability: false)}?")
@@ -155,17 +147,17 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
       ..optionalParameters.addAll(params)
       ..returns = refer(clazz.name)
       ..body = Code(
-          copyToMethodBody(clazz, fields.map((field) => field.displayName)));
+          copyToMethodBody(clazz, parameters.map((field) => field.displayName)));
 
     return mb.build();
   }
 
-  Method _toStringMethod(String className, List<FieldElement> fields) {
+  Method _toStringMethod(String className, List<ParameterElement> parameters) {
     final mb = MethodBuilder()
       ..name = 'toString'
       ..returns = refer('String')
       ..body = Code(
-          toStringBody(className, fields.map((field) => field.displayName)));
+          toStringBody(className, parameters.map((field) => field.displayName)));
 
     return mb.build();
   }
