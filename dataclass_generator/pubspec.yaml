@@ -5,7 +5,7 @@ author: Jaroslaw Butajlo <jaroslaw.butajlo@gmail.com>, Nikita Kozlov <nick@nk2.e
 homepage: https://github.com/nk2ishere/dart_dataclass
 
 environment:
-  sdk: ">2.12.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   dataclass_beta:
