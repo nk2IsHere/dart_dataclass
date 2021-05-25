@@ -107,9 +107,9 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
     return mb.build();
   }
 
-  bool _hasDeepCollectionEquality(FieldElement fieldElement) {
+  bool _hasDeepCollectionEquality(ParameterElement parameterElement) {
     final collectionAnnotation =
-        TypeChecker.fromRuntime(Collection).firstAnnotationOf(fieldElement);
+        TypeChecker.fromRuntime(Collection).firstAnnotationOf(parameterElement);
 
     if (collectionAnnotation == null)
       return false;
@@ -119,7 +119,7 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
   }
 
   Method _hashCodeMethod(List<ParameterElement> parameters) {
-    final props = parameters.map((field) => field.name);
+    final props = parameters.map((parameter) => parameter.name);
 
     MethodBuilder mb = MethodBuilder()
       ..name = 'hashCode'
@@ -136,9 +136,9 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
 
   Method _copyWithMethod(ClassElement clazz, List<ParameterElement> parameters) {
     final params = parameters
-        .map((field) => ParameterBuilder()
-          ..name = field.name
-          ..type = refer("${field.type.getDisplayString(withNullability: false)}?")
+        .map((parameter) => ParameterBuilder()
+          ..name = parameter.name
+          ..type = refer("${parameter.type.getDisplayString(withNullability: false)}?")
           ..named = true)
         .map((paramBuilder) => paramBuilder.build());
 
@@ -147,7 +147,7 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
       ..optionalParameters.addAll(params)
       ..returns = refer(clazz.name)
       ..body = Code(
-          copyToMethodBody(clazz, parameters.map((field) => field.displayName)));
+          copyToMethodBody(clazz, parameters.map((parameter) => parameter.displayName)));
 
     return mb.build();
   }
@@ -157,14 +157,14 @@ class DataClassGenerator extends GeneratorForAnnotation<DataClass> {
       ..name = 'toString'
       ..returns = refer('String')
       ..body = Code(
-          toStringBody(className, parameters.map((field) => field.displayName)));
+          toStringBody(className, parameters.map((parameter) => parameter.displayName)));
 
     return mb.build();
   }
 }
 
-String equalsBody(String className, Map<String, bool> fields) {
-  final fieldEquals = fields.entries.fold<String>('true', (value, element) {
+String equalsBody(String className, Map<String, bool> parameters) {
+  final parameterEquals = parameters.entries.fold<String>('true', (value, element) {
     final hasDeepCollectionEquality = element.value;
     if (hasDeepCollectionEquality) {
       return '$value && DeepCollectionEquality().equals(this.${element.key},other.${element.key})';
@@ -177,7 +177,7 @@ String equalsBody(String className, Map<String, bool> fields) {
   if (identical(this, other)) return true;
   if (other is! $className) return false;
 
-  return $fieldEquals;
+  return $parameterEquals;
 ''';
 }
 
