@@ -17,7 +17,7 @@ class Collection {
   });
 }
 
-bool collectionEquals(e1, e2) =>
+bool collectionEquals(dynamic e1, dynamic e2) =>
   DeepCollectionEquality().equals(e1, e2);
 
 // Copied from equatable
