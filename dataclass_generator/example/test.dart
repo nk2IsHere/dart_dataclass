@@ -5,11 +5,16 @@ part 'test.g.dart';
 
 @DataClass()
 class Test with _$Test {
+
   final int a;
-  final int b;
+  final int? b;
+  final List<int?> c;
+  final List<int?>? d;
 
   Test({
     required this.a,
-    this.b = 4
+    this.b = 4,
+    @Collection() this.c = const [],
+    @Collection() this.d
   });
 }

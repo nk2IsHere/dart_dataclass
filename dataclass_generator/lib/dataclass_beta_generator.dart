@@ -170,7 +170,7 @@ String equalsBody(String className, Map<String, bool> parameters) {
   final parameterEquals = parameters.entries.fold<String>('true', (value, element) {
     final hasDeepCollectionEquality = element.value;
     if (hasDeepCollectionEquality) {
-      return '$value && DeepCollectionEquality().equals(this.${element.key},other.${element.key})';
+      return '$value && collectionEquals(this.${element.key},other.${element.key})';
     } else {
       return '$value && this.${element.key} == other.${element.key}';
     }

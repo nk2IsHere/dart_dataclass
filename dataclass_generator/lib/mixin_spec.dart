@@ -12,8 +12,9 @@ import 'package:code_builder/src/specs/method.dart';
 import 'package:code_builder/src/specs/reference.dart';
 import 'package:dataclass_beta_generator/visitor_extensions.dart';
 
-part 'mixin_spec.g.dart';
+part 'mixin_spec.generated.dart';
 
+// Adapted from: https://github.com/dart-lang/code_builder/pull/263
 @immutable
 abstract class Mixin extends Object
     with HasAnnotations, HasDartDocs, HasGenerics

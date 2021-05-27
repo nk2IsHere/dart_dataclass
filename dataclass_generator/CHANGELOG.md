@@ -1,3 +1,8 @@
+## [1.0.0]
+* Migrate to nullsafety
+* Use mixin instead of abstract class
+* Update toString() method
+
 ## [0.4.0+3]
 * Bump versions
 

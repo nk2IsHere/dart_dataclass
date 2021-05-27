@@ -8,11 +8,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  dataclass_beta:
-    git:
-      url: https://github.com/nk2IsHere/dart_dataclass.git
-      path: dataclass
-      ref: 112aecd
+  dataclass_beta: ^1.0.1
   source_gen: ^1.0.0
   code_builder: ^4.0.0
 

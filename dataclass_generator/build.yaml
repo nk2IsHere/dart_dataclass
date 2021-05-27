@@ -1,15 +1,15 @@
 targets:
   $default:
     builders:
-      dataclass_beta_generator|dataclass_beta:
-        enabled: true
+      dataclass_beta_generator:
+        generate_for:
+          - example/*
 
 builders:
-  dataclass:
-    target: ":dataclass_beta_generator"
+  dataclass_beta_generator:
     import: "package:dataclass_beta_generator/dataclass_beta_generator.dart"
     builder_factories: ["dataClass"]
-    build_extensions: {".dart": [".g.part"]}
+    build_extensions: {".dart": ["dataclass_beta_generator.g.part"]}
     auto_apply: dependents
     build_to: cache
     applies_builders: ["source_gen|combining_builder"]
