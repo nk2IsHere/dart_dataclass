@@ -10,10 +10,12 @@ class Collection {
 
   /// If `deepEquality` is set to true.
   /// The generated `operator==`  uses DeepCollectionEquality from collection package
-  const Collection({this.deepEquality = true});
+  const Collection({
+    this.deepEquality = true
+  });
 }
 
-// Copied from equatable packages
+// Copied from equatable
 int mapPropsToHashCode(Iterable props) =>
     _finish(props.fold(0, (hash, object) => _combine(hash, object)));
 
@@ -37,4 +39,3 @@ int _finish(int hash) {
   hash = hash ^ (hash >> 11);
   return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
 }
-

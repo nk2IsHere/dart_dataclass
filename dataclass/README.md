@@ -3,7 +3,7 @@
 
 `@DataClass` annotation used for dataclass_generator
 
-The DataClass generator generates base class for your data class with methods:
+The DataClass generator generates mixin for your data class with methods:
 
 - equals (operator ==)
 - hashCode
@@ -29,13 +29,17 @@ The class should:
 - unnamed constructor with named parameters for all fields
 
 ```dart
-@dataClass
+@DataClass()
 class Car {
   final String name;
-  final String manufacturer;
+  final String? manufacturer;
   final double price;
 
-  Car({this.name, this.manufacturer, this.price});
+  Car({
+    required this.name, 
+    this.manufacturer, 
+    required this.price
+  });
 }
 ```
 
@@ -46,11 +50,11 @@ Run `pub run build_runner build`
 #### Generated file
 
 ```dart
-abstract class _$Car {
+mixin _$Car {
   const _$Car();
 
   String get name;
-  String get manufacturer;
+  String? get manufacturer;
   double get price;
   bool operator ==(other) {
     if (identical(this, other)) return true;
@@ -67,10 +71,10 @@ abstract class _$Car {
   }
 
   String toString() {
-    return 'Car <\'name\': ${this.name},\'manufacturer\': ${this.manufacturer},\'price\': ${this.price},>';
+    return 'Car(name=${this.name}, manufacturer=${this.manufacturer}, price=${this.price})';
   }
 
-  Car copyWith({String name, String manufacturer, double price}) {
+  Car copyWith({String? name, String? manufacturer, double? price}) {
     return Car(
       name: name ?? this.name,
       manufacturer: manufacturer ?? this.manufacturer,
@@ -83,25 +87,29 @@ abstract class _$Car {
 ### 3. Extend class with generated base class
 
 ```dart
-@dataClass
-class Car extends _$Car {
+@DataClass()
+class Car with _$Car {
   final String name;
-  final String manufacturer;
+  final String? manufacturer;
   final double price;
 
-  Car({this.name, this.manufacturer, this.price});
+  Car({
+    required this.name, 
+    this.manufacturer, 
+    required this.price
+  });
 }
 ```
 
 #### Collection equality
 ```dart
 
-@dataClass
-class Car extends _$Car {
+@DataClass()
+class Car with _$Car {
   @Collection(deepEquality: true) // Short-hand: @Collection()
   final List<String> parts;
 
-  const Car({this.parts});
+  const Car({required this.parts});
 }
 ```
 
