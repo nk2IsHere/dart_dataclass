@@ -106,10 +106,13 @@ class Car with _$Car {
 
 @DataClass()
 class Car with _$Car {
-  @Collection(deepEquality: true) // Short-hand: @Collection()
+
   final List<String> parts;
 
-  const Car({required this.parts});
+  const Car({
+    @Collection(deepEquality: true) // Short-hand: @Collection()
+    required this.parts
+  });
 }
 ```
 

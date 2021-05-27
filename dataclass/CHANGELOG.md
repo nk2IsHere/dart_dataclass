@@ -1,3 +1,6 @@
+## [1.0.1]
+* Add collection equality methods
+
 ## [1.0.0, 1.0.0+0]
 * Migrate to nullsafety
 * Use mixin instead of abstract class
